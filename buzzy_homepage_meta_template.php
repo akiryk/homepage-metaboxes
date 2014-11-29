@@ -94,11 +94,11 @@ function buzzy_homepage_hero_meta_callback( $post ) {
     <div class="prfx-row-content">
         <label for="mb-callout-style-1">
             <input type="radio" name="mb-callout-style" id="mb-callout-style-1" value="callout-major" <?php if ( isset ( $prfx_stored_meta['mb-callout-style'] ) ) checked( $prfx_stored_meta['mb-callout-style'][0], 'callout-major' ); ?>>
-            <?php _e( 'Style 1', 'prfx-textdomain' )?>
+            <?php _e( 'Style 1 (red text)', 'prfx-textdomain' )?>
         </label>
         <label for="mb-callout-style-2">
             <input type="radio" name="mb-callout-style" id="mb-callout-style-2" value="callout-minor" <?php if ( isset ( $prfx_stored_meta['mb-callout-style'] ) ) checked( $prfx_stored_meta['mb-callout-style'][0], 'callout-minor' ); ?>>
-            <?php _e( 'Style 2', 'prfx-textdomain' )?>
+            <?php _e( 'Style 2 (blue background)', 'prfx-textdomain' )?>
         </label>
     </div>
 </p>
@@ -112,6 +112,14 @@ function buzzy_homepage_hero_meta_callback( $post ) {
     <input type="hidden" name="meta-image" id="meta-image" value="<?php if ( isset ( $prfx_stored_meta['meta-image'] ) ) echo $prfx_stored_meta['meta-image'][0]; ?>" />
     <input type="button" id="meta-image-button" class="button add-image" value="<?php _e( 'Choose or Upload an Image', 'prfx-textdomain' )?>" />
   </div>
+   <p>
+    <label for="mb-blurb" class="prfx-row-title"><?php _e( 'Endorsement blurb (keep it short)', 'prfx-textdomain' )?></label>
+    <input type="text" name="mb-blurb" class="meta-text-input" value="<?php if ( isset ( $prfx_stored_meta['mb-blurb'] ) ) echo $prfx_stored_meta['mb-blurb'][0]; ?>" />
+  </p>
+  <p>
+    <label for="mb-blurb-source" class="prfx-row-title"><?php _e( 'Endorsement source', 'prfx-textdomain' )?></label>
+    <input type="text" name="mb-blurb-source" class="meta-text-input" value="<?php if ( isset ( $prfx_stored_meta['mb-blurb-source'] ) ) echo $prfx_stored_meta['mb-blurb-source'][0]; ?>" />
+  </p>
 
   <?php
 }
@@ -163,6 +171,14 @@ function buzzy_homepage_hero_meta_save( $post_id ) {
   // Save image
   if( isset( $_POST[ 'meta-image' ] ) ) {
     update_post_meta( $post_id, 'meta-image', $_POST[ 'meta-image' ] );
+  }
+
+  // Save blurb
+  if( isset( $_POST[ 'mb-blurb' ] ) ) {
+    update_post_meta( $post_id, 'mb-blurb', $_POST[ 'mb-blurb' ] );
+  }
+  if( isset( $_POST[ 'mb-blurb-source' ] ) ) {
+    update_post_meta( $post_id, 'mb-blurb-source', $_POST[ 'mb-blurb-source' ] );
   }
 }
 add_action( 'save_post', 'buzzy_homepage_hero_meta_save' );
